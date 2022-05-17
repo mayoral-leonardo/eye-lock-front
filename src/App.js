@@ -1,10 +1,11 @@
-import './App.css';
+import {BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
 
 function App() {
   return (
-    <div className="App">
-      <header> Projeto Eye-Lock </header>
-    </div>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 }
 
