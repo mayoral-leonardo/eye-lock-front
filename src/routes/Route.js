@@ -16,16 +16,16 @@ export default function RouteWrapper({
     return <Redirect to='/' />
   }
 
-  if(signed && !isPrivate) {
+  if (signed && !isPrivate) {
     return <Redirect to='/dashboard' />
   }
 
   return (
     <Route
       {...rest}
-      render={(props) => (
+      render={props => (
         <Component {...props} />
       )}
     />
-  );
+  )
 }
