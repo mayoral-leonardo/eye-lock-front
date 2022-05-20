@@ -30,7 +30,7 @@ function AuthProvider({ children }) {
       .then(async (value) => {
         let uid = value.user.uid;
 
-        const userProfile = await firebase.firestore().collection('usuarios').doc(uid).get();
+        const userProfile = await firebase.firestore().collection('usersTesteFront').doc(uid).get();
 
         let data = {
           uid: uid,
@@ -63,7 +63,7 @@ function AuthProvider({ children }) {
       .then(async (value) => {
         let uid = value.user.uid;
 
-        await firebase.firestore().collection('usuarios')
+        await firebase.firestore().collection('usersTesteFront')
           .doc(uid).set({
             name: name,
             avatarUrl: null,
