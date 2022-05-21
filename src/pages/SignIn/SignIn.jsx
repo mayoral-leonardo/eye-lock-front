@@ -18,9 +18,9 @@ export default function SignIn() {
   }
 
   return (
-    <div className='container-center'>
-      <div className='login'>
-        <div className='logo-area'>
+    <div className='login__container'>
+      <div className='login__area'>
+        <div className='login__logo'>
           <img src={logo} alt='Logo do Sistema' />
         </div>
 
@@ -30,8 +30,7 @@ export default function SignIn() {
           <input type='password' placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type='submit'>{loadingAuth ? 'Carregando...' : 'Acessar'}</button>
         </form>
-
-
+        <span className="login__inform">Não possui um acesso ? Solicite um login ao administrador do sistema !</span>
       </div>
     </div>
   )

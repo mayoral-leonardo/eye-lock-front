@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext } from "react";
-import firebase from '../services/firebaseConnection';
 import authConsumer from "./authConsumer";
 // import { toast } from "react-toastify";
 
