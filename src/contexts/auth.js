@@ -34,7 +34,6 @@ function AuthProvider({ children }) {
     setLoadingAuth(true);
     try {
       const response = await authConsumer.signIn(email, password);
-      console.log(response)
       setUser(response.user);
       storageUser(response.user);
     } catch (error) {

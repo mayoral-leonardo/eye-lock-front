@@ -1,0 +1,53 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/svgs/main-bg.svg');
+  background-size: cover;
+  color: aqua;
+}
+
+.dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #000000;
+}
+
+.dashboard__header button {
+  width: 50px;
+  height: 30px;
+  background-color: aqua;
+  color: #000000;
+  border-radius: 10px;
+}
+
+.dashboard__main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard__cards-section {
+  width: 60%;
+  padding: 1rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.dashboard__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background-color: #181C2E;
+  border-radius: 12px;
+}

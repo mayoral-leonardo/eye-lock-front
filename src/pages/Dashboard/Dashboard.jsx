@@ -1,13 +1,29 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/auth"
+import './Dashboard.css';
 
 export default function Dashboard() {
-  const { user, signOut, setUser, storageUser } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={() => signOut()} >Sair</button>
-    </div>
+    <section className='dashboard'>
+      <div className='dashboard__header'>
+        <h1>Bem vindo {user.name}</h1>
+        <button onClick={() => signOut()} >Sair</button>
+      </div>
+      <div className='dashboard__main-content'>
+        <div className='dashboard__cards-section'>
+          <div className='dashboard__card'>
+            <span>Usuários</span>
+          </div>
+          <div className='dashboard__card'>
+            <span>Imagens</span>
+          </div>
+          <div className='dashboard__card'>
+            <span>Funções</span>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
