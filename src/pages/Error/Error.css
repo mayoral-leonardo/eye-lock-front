@@ -1,0 +1,39 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found h1 {
+  font-size: 100px;
+  margin-bottom: 5px;
+}
+
+.not-found h2 {
+  font-size: 40px;
+  margin-top: 0;
+}
+
+
+.not-found a{
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #6D1F76;
+  padding: 10px;
+}
+
+.not-found a:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+}
+
+@media screen and (max-width: 500px) {
+  .not-found h1 {
+    font-size: 80px;
+  }
+  
+  .not-found h2 {
+    font-size: 30px;
+  }
+ }
