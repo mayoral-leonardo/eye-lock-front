@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from "../../contexts/auth"
 import './Header.css';
 
-export default function Header() {
+export default function Header({onClick}) {
   const { user, signOut } = useContext(AuthContext);
   return (
     <header className='header'>
-      <Link className='logo' to='/'>Eye Lock</Link>
+      <button className='header__items__buttons__item' onClick={onClick}>Eye Lock</button>
 
       <div className='header__items'>
         <div className='header__items__buttons'>

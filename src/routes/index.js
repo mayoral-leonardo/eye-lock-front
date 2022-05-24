@@ -3,14 +3,16 @@ import Route from "./Route";
 
 import SignIn from "../pages/SignIn/SignIn";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import Error from "../pages/Error/Error";
+import SystemFunctions from "../pages/SystemFunctions/SystemFunctions";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={SignIn} />
       <Route exact path="/dashboard" component={Dashboard} isPrivate />
-      <Route path="*" component={Error}/>
+      <Route exact path="/functions" component={SystemFunctions} isPrivate />
+      <Route path="*" component={ErrorPage}/>
     </Switch>
   );
 }

@@ -1,18 +1,21 @@
-import { useState, useContext } from 'react';
-import { AuthContext } from "../../contexts/auth"
+import React, { useState } from "react";
 import Header from '../../components/Header/Header';
 import './Dashboard.css';
+import { useHistory } from 'react-router';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 export default function Dashboard() {
-  const { user, signOut } = useContext(AuthContext);
+  const history = useHistory();
+  const [showDrawer, setShowDrawer] = useState(false);
+
 
   return (
     <section className='dashboard'>
-      {/* <div className='dashboard__header'>
-        <h1>Bem vindo {user.name}</h1>
-        <button onClick={() => signOut()} >Sair</button>
-      </div> */}
-      <Header />
+      <Sidebar
+        onClose={() => setShowDrawer(false)}
+        visible={showDrawer}
+      />
+      <Header onClick={() => setShowDrawer(true)}/>
       <div className='dashboard__main-content'>
         <div className='dashboard__cards-section'>
           <div className='dashboard__card'>
@@ -21,7 +24,10 @@ export default function Dashboard() {
           <div className='dashboard__card'>
             <span>Imagens</span>
           </div>
-          <div className='dashboard__card'>
+          <div
+            className='dashboard__card'
+            onClick={() => history.push('/functions')}
+          >
             <span>Funções</span>
           </div>
         </div>
