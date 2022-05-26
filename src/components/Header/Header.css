@@ -63,3 +63,12 @@
 .logo:hover {
   filter: brightness(80%);
 }
+
+.header__menu-icon {
+  font-size: 30px;
+}
+
+.header__menu-icon:hover {
+  cursor: pointer !important;
+  filter: brightness(80%);
+}

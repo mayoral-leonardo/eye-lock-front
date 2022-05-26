@@ -17,7 +17,7 @@ export default function Sidebar() {
         <Drawer
           drawerStyle={{ backgroundColor: '#181C2E' }}
           headerStyle={{ backgroundColor: 'aqua' }}
-          title="Sistema"
+          title="Eye-Lock"
           placement="left"
           closable
           onClose={() => setShowDrawer(false)}
