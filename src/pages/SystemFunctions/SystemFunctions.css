@@ -1,8 +1,27 @@
 .system-functions {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
   width: 100%;
   background-image: url('../../assets/svgs/main-bg.svg');
   background-size: cover;
+}
+.system-functions__main-content {
+  padding-top: 5rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 10rem);
+  height: 100%;
+}
+
+.system-functions__grid-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  height: 100%;
+  width: 100%;
 }

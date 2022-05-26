@@ -9,7 +9,7 @@ export default function Sidebar() {
   const [showDrawer, setShowDrawer] = useState(false);
 
 
-  const { lg } = useBreakpoint();
+  const { md, lg, xl } = useBreakpoint();
   return (
     <>
       <Header onClick={() => setShowDrawer(true)} />
@@ -22,7 +22,7 @@ export default function Sidebar() {
           closable
           onClose={() => setShowDrawer(false)}
           visible={showDrawer}
-          width={lg ? '12%' : '100%'}
+          width={lg ? '16%' : md ? '40%' : '100%'}
         >
           <div className='sidebar__main-content'>
             <Link to='/' className='sidebar__main-content__button'>Dashboard</Link>
