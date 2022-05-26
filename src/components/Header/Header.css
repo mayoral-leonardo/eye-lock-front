@@ -65,6 +65,7 @@
 }
 
 .header__menu-icon {
+  color: aqua !important;
   font-size: 30px;
 }
 

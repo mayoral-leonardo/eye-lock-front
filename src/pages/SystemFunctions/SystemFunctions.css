@@ -1,0 +1,8 @@
+.system-functions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/svgs/main-bg.svg');
+  background-size: cover;
+}

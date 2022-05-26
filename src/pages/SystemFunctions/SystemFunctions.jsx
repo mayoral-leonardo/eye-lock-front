@@ -1,4 +1,5 @@
 import React from "react";
+import './SystemFunctions.css';
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 export default function SystemFunctions() {
