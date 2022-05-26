@@ -1,29 +1,37 @@
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 import { Grid, Drawer } from 'antd';
 import './Sidebar.css';
 
-export default function Sidebar({ visible, onClose }) {
+export default function Sidebar() {
   const { useBreakpoint } = Grid;
+  const [showDrawer, setShowDrawer] = useState(false);
+
 
   const { lg } = useBreakpoint();
   return (
-    <section className='sidebar'>
-      <Drawer
-        drawerStyle={{backgroundColor: '#181C2E'}}
-        headerStyle={{backgroundColor: 'aqua'}}
-        title="Sistema"
-        placement="left"
-        closable
-        onClose={onClose}
-        visible={visible}
-        width={lg ? '12%' : '100%'}
-      >
-        <div className='sidebar__main-content'>
-          <button className='sidebar__main-content__button'>Usuários</button>
-          <button className='sidebar__main-content__button'>Funções</button>
-          <button className='sidebar__main-content__button'>Imagens</button>
-        </div>
-      </Drawer>
-    </section>
+    <>
+      <Header onClick={() => setShowDrawer(true)} />
+      <section className='sidebar'>
+        <Drawer
+          drawerStyle={{ backgroundColor: '#181C2E' }}
+          headerStyle={{ backgroundColor: 'aqua' }}
+          title="Sistema"
+          placement="left"
+          closable
+          onClose={() => setShowDrawer(false)}
+          visible={showDrawer}
+          width={lg ? '12%' : '100%'}
+        >
+          <div className='sidebar__main-content'>
+            <Link to='/' className='sidebar__main-content__button'>Dashboard</Link>
+            <button className='sidebar__main-content__button'>Usuários</button>
+            <Link to='/functions' className='sidebar__main-content__button'>Funções</Link>
+            <button className='sidebar__main-content__button'>Imagens</button>
+          </div>
+        </Drawer>
+      </section>
+    </>
   )
 }
