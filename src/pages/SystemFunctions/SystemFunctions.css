@@ -8,7 +8,6 @@
   background-size: cover;
 }
 .system-functions__main-content {
-  padding-top: 5rem;
   margin-left: 10rem;
   margin-right: 10rem;
   display: flex;
@@ -18,10 +17,90 @@
   height: 100%;
 }
 
-.system-functions__grid-content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.system-functions__cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
+}
+
+.system-functions__cards__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25rem;
+  height: 30rem;
+  border-radius: 12px;
+  margin: 0 1rem;
+}
+
+.system-functions__cards__item__header {
+  padding: 0.5rem;
+  width: 100%;
+  height: 15%;
+  text-align: left;
+  background-color: #181C2E;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.system-functions__cards__item__header > span {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.system-functions__cards__item__number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  width: 100%;
+  height: 70%;
+  background-color: gray;
+}
+
+.system-functions__cards__item__number > span{
+  font-size: 10rem;
+  color: black;
+}
+
+.system-functions__cards__item__title {
+  padding: 0.5rem;
+  width: 100%;
+  height: 15%;
+  text-align: left;
+  align-items: center;
+  background-color: #181C2E;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.system-functions__cards__item__title__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.system-functions__cards__item__title__buttons > span {
+  font-size: 1.5rem;
+  color: white;
+  width: auto;
+  cursor: pointer;
+}
+
+.system-functions__cards__item__title__buttons > div {
+  width: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  font-size: 40px !important;
+  color: white !important;
 }
