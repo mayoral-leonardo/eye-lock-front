@@ -9,7 +9,7 @@ export default function Sidebar() {
   const [showDrawer, setShowDrawer] = useState(false);
 
 
-  const { md, lg, xl } = useBreakpoint();
+  const { md, lg } = useBreakpoint();
   return (
     <>
       <Header onClick={() => setShowDrawer(true)} />
@@ -26,7 +26,7 @@ export default function Sidebar() {
         >
           <div className='sidebar__main-content'>
             <Link to='/' className='sidebar__main-content__button'>Dashboard</Link>
-            <button className='sidebar__main-content__button'>Usuários</button>
+            <Link to='/users' className='sidebar__main-content__button'>Usuários</Link>
             <Link to='/functions' className='sidebar__main-content__button'>Funções</Link>
             <button className='sidebar__main-content__button'>Imagens</button>
           </div>

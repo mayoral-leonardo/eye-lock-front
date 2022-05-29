@@ -1,0 +1,24 @@
+.users-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/svgs/main-bg.svg');
+  background-size: cover;
+}
+
+.users-table__main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.users-table__table {
+  padding: 10px;
+  border-radius: 12px;
+  color: black;
+  background-color: rgb(216, 206, 216);
+}

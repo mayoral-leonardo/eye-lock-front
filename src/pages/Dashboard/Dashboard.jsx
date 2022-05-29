@@ -13,7 +13,7 @@ export default function Dashboard() {
       <Sidebar />
       <div className='dashboard__main-content'>
         <div className='dashboard__cards-section'>
-          <Card title='Usuários' icon={<MenuOutlined/>}/>
+          <Card title='Usuários' icon={<MenuOutlined/>} onClick={() => history.push('/users')}/>
           <Card title='Imagens' />
           <Card title='Funções' onClick={() => history.push('/functions')} />
         </div>
