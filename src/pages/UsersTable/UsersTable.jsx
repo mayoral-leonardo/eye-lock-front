@@ -3,7 +3,7 @@ import './UsersTable.css'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link } from 'react-router-dom';
 import users from './consumer'
-import { Table, Tag } from 'antd';
+import { Button, Table, Tag } from 'antd';
 
 export default function UsersTable() {
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,6 @@ export default function UsersTable() {
       try {
         const response = await users.show();
         setAllUsers(response);
-        console.log(response)
       } catch (error) {
         console.log(error)
       } finally {
@@ -42,7 +41,11 @@ export default function UsersTable() {
       dataIndex: 'name',
       key: 'name',
       width: '300px',
-      render: text => <Link>{text}</Link>,
+      render: text =>
+        <Link
+          className='users-table__name-tag'
+        >{text}
+        </Link>,
     },
 
     {
@@ -67,13 +70,23 @@ export default function UsersTable() {
     <section className='users-table'>
       <Sidebar />
       <div className='users-table__main-content'>
-        <Table
-          className='users-table__table'
-          rowClassName='users-table__table'          
-          loading={loading}
-          columns={columns}
-          dataSource={allUsers}
-        />
+        <div className='users-table__main-content__button'>
+          <Button
+            type='primary'
+            className='users-table__main-content__button__item'
+          >
+            Criar novo usuário
+          </Button>
+        </div>
+        <div className='table-padding'>
+          <Table
+            className='users-table__table'
+            rowClassName='users-table__table'
+            loading={loading}
+            columns={columns}
+            dataSource={allUsers}
+          />
+        </div>
       </div>
     </section>
   )

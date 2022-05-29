@@ -8,17 +8,47 @@
   background-size: cover;
 }
 
+.users-table__name-tag {
+  color: black;
+}
+
+.users-table__name-tag:hover {
+  color: black;
+  font-weight: bold;
+}
+
 .users-table__main-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+  transform: translateY(-60px);
+}
+
+.users-table__main-content__button {
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  margin-top: 1rem;
+}
+
+.users-table__main-content__button__item {
+  border-radius: 12px !important;
+  background-color: aqua !important;
+  color: black !important;
 }
 
 .users-table__table {
-  padding: 10px;
   border-radius: 12px;
   color: black;
   background-color: rgb(216, 206, 216);
+}
+
+.table-padding {
+  padding: 0 15px;
 }
