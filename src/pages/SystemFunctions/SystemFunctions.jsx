@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import './SystemFunctions.css';
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { DownOutlined, UpOutlined, StopOutlined, MinusOutlined } from "@ant-design/icons";
+import { DownOutlined, UpOutlined, StopOutlined, MinusOutlined, BulbOutlined } from "@ant-design/icons";
 
 export default function SystemFunctions() {
   const [temperature, setTemperature] = useState(22);
   const [isOn, setIsOn] = useState(false)
+  const [isBulbOn, setIsBulbOn] = useState(false)
 
   return (
     <section className='system-functions'>
@@ -24,7 +25,8 @@ export default function SystemFunctions() {
                 <span onClick={() => {
                   setIsOn(prev => !prev)
                   setTemperature(22)
-                }}>{isOn ? 'Desligar' : 'Ligar'}</span>
+                }}>{isOn ? 'Desligar' : 'Ligar'}
+                </span>
                 <div>
                   {temperature > 18 && isOn
                     ? <DownOutlined className='button' onClick={() => setTemperature(temperature - 1)} />
@@ -40,13 +42,16 @@ export default function SystemFunctions() {
           </div>
           <div className='system-functions__cards__item'>
             <div className='system-functions__cards__item__header'>
-              <span>Ar Condicionado</span>
+              <span>Lâmpada</span>
             </div>
             <div className='system-functions__cards__item__number'>
-              <span>{temperature}</span>
+              <span><BulbOutlined className={`${isBulbOn ? 'on-color' : 'off-color'}`}/></span>
             </div>
             <div className='system-functions__cards__item__title'>
-              <span>Ligar</span>
+              <div className='system-functions__cards__item__title__buttons'>
+                <span onClick={() => {setIsBulbOn(prev => !prev)}}>{isBulbOn ? 'Desligar' : 'Ligar'}
+                </span>
+              </div>
             </div>
           </div>
         </div>
