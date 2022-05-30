@@ -40,3 +40,7 @@
   cursor: pointer;
   filter: brightness(80%);
 }
+
+.dashboard__icon {
+  font-size: 60px;
+}

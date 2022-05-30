@@ -26,9 +26,9 @@ export default function Sidebar() {
         >
           <div className='sidebar__main-content'>
             <Link to='/' className='sidebar__main-content__button'>Dashboard</Link>
-            <Link to='/users' className='sidebar__main-content__button'>Usuários</Link>
             <Link to='/functions' className='sidebar__main-content__button'>Funções</Link>
             <button className='sidebar__main-content__button'>Imagens</button>
+            <Link to='/users' className='sidebar__main-content__button'>Usuários</Link>
           </div>
         </Drawer>
       </section>
