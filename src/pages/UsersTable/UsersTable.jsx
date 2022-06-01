@@ -99,14 +99,12 @@ export default function UsersTable() {
             <Col span={24}>
               <img src={avatar} width='250' alt='Foto de perfil do usuário' />
             </Col>
-            <Row gutter={[10, 10]}>
-              <Col span={16}>
-                <label className='label-avatar'>
-                  <span>Foto</span>
-                  <Input type='file' accept='image/*' />
-                </label>
-              </Col>
-            </Row>
+            <Col span={14}>
+              <label style={{ color: 'white' }}>
+                <span>Foto</span>
+                <Input type='file' accept='image/*' />
+              </label>
+            </Col>
             <Col span={12}>
               <label htmlFor='input-name' style={{ color: 'white' }}>Nome</label>
               <Input type='text' id='input-name'></Input>
