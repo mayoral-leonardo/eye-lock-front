@@ -8,6 +8,44 @@
   background-size: cover;
 }
 
+.ant-modal-body {
+  background-color: gray;
+}
+
+.ant-modal-header, .ant-modal-footer {
+  background-color: rgb(5, 145, 145) !important;
+}
+
+svg {
+  color: #fff !important;
+}
+
+input {
+  border-radius: 8px !important;
+}
+
+img {
+  width: 70px;
+  height: 70px;
+}
+
+.ant-btn {
+  border-radius: 8px !important;
+}
+
+.ant-btn:hover {
+  text-decoration: none;
+  transform: scale(1.05);
+}
+
+.ant-btn-primary {
+  background-color: rgb(63, 63, 63) !important;
+}
+
+.ant-modal-title {
+  color: white !important;
+}
+
 .users-table__name-tag {
   color: black;
 }
