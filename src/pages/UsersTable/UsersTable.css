@@ -33,6 +33,15 @@
   object-fit: cover;
 }
 
+.users-table__select {
+  width: 100% !important;
+  color: black;
+}
+
+.users-table__select svg {
+  color: black !important;
+}
+
 .users-table__avatar {
   margin-top: 12px;
   width: 100px;

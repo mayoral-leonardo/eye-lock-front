@@ -4,7 +4,7 @@ import avatar from '../../assets/images/avatar.png'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link } from 'react-router-dom';
 import users from './consumer'
-import { Button, Col, Input, Modal, Row, Table, Tag } from 'antd';
+import { Button, Col, Input, Modal, Row, Select, Table, Tag } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
@@ -13,6 +13,9 @@ export default function UsersTable() {
   const [allUsers, setAllUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [selectedLevel, setSelectedLevel] = useState('');
 
   function translateLevels(level) {
     switch (level) {
@@ -91,7 +94,7 @@ export default function UsersTable() {
   }
 
   function handleOk() {
-    setAvatarUrl(null); 
+    setAvatarUrl(null);
     setModalVisible(false);
   }
 
@@ -134,6 +137,17 @@ export default function UsersTable() {
                 <Col span={24}>
                   <label htmlFor='input-email' style={{ color: 'white' }}>E-mail</label>
                   <Input type='text' id='input-email'></Input>
+                </Col>
+                <Col span={24}>
+                  <label htmlFor='input-level' style={{ color: 'white', marginRight: '15px' }}>Nível de acesso</label>
+                  <Select
+                    placeholder='Selecione o nível de acesso'
+                    className='users-table__select'
+                    onChange={(element) => setSelectedLevel(element)}
+                  >
+                    <Select.Option value='resident'>Residente</Select.Option>
+                    <Select.Option value='visitor'>Visitante</Select.Option>
+                  </Select>
                 </Col>
 
               </Row>
