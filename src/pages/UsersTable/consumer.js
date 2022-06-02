@@ -9,6 +9,16 @@ const users = {
       console.log(error);
       return error.response.data;
     }
+  },
+
+  create: async (params) => {
+    try {
+      const response = await api.post('/register', params);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data;
+    }
   }
 }
 
