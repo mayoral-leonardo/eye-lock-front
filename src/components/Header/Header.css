@@ -64,7 +64,7 @@
   filter: brightness(80%);
 }
 
-.header__menu-icon {
+.header__menu-icon svg {
   color: aqua !important;
   font-size: 30px;
 }

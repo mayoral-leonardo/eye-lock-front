@@ -5,11 +5,14 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link } from 'react-router-dom';
 import users from './consumer'
 import { Button, Col, Input, Modal, Row, Table, Tag } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
 
 export default function UsersTable() {
   const [loading, setLoading] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   function translateLevels(level) {
     switch (level) {
@@ -68,12 +71,27 @@ export default function UsersTable() {
 
   ];
 
+  function handleFile(e) {
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+
+      if (image.type === 'image/jpeg' || image.type === 'image/png') {
+        // setImageAvatar(image);
+        setAvatarUrl(URL.createObjectURL(e.target.files[0]))
+      } else {
+        alert('Envie uma imagem do tipo JPEG ou PNG');
+        // setImageAvatar(null);
+        return null;
+      }
+    }
+  }
+
   function handleCancel() {
     setModalVisible(false);
   }
 
   function handleOk() {
-    alert('deu bom')
+    setAvatarUrl(null); 
     setModalVisible(false);
   }
 
@@ -82,8 +100,9 @@ export default function UsersTable() {
       <Sidebar />
       <div className='users-table__main-content'>
         <Modal
+          className='users-table__modal'
           visible={modalVisible}
-          title="Title"
+          title="Cadastro de usuário"
           onOk={handleOk}
           onCancel={handleCancel}
           footer={[
@@ -96,22 +115,28 @@ export default function UsersTable() {
           ]}
         >
           <Row gutter={[10, 10]}>
-            <Col span={24}>
-              <img src={avatar} width='250' alt='Foto de perfil do usuário' />
-            </Col>
-            <Col span={14}>
-              <label style={{ color: 'white' }}>
-                <span>Foto</span>
-                <Input type='file' accept='image/*' />
+            <Col span={8}>
+              <label className='users-table__avatar'>
+                <span><UploadOutlined color='#FFFFFF' size={25} /></span>
+                <Input type='file' accept='image/*' onChange={handleFile} />
+                {avatarUrl === null ?
+                  <img src={avatar} width='250' alt='Foto de perfil do usuário' />
+                  : <img src={avatarUrl} width='250' alt='Foto de perfil do usuário' />
+                }
               </label>
             </Col>
-            <Col span={12}>
-              <label htmlFor='input-name' style={{ color: 'white' }}>Nome</label>
-              <Input type='text' id='input-name'></Input>
-            </Col>
-            <Col span={12}>
-              <label htmlFor='input-email' style={{ color: 'white' }}>E-mail</label>
-              <Input type='text' id='input-email'></Input>
+            <Col span={16}>
+              <Row gutter={[10, 10]}>
+                <Col span={24}>
+                  <label htmlFor='input-name' style={{ color: 'white' }}>Nome</label>
+                  <Input type='text' id='input-name'></Input>
+                </Col>
+                <Col span={24}>
+                  <label htmlFor='input-email' style={{ color: 'white' }}>E-mail</label>
+                  <Input type='text' id='input-email'></Input>
+                </Col>
+
+              </Row>
             </Col>
           </Row>
         </Modal>
