@@ -92,6 +92,7 @@
 }
 
 .users-table__name-tag:hover {
+  cursor: pointer;
   color: black;
   font-weight: bold;
 }

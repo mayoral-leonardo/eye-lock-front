@@ -10,10 +10,30 @@ const users = {
       return error.response.data;
     }
   },
+  
+  find: async (id) => {
+    try {
+      const response = await api.get(`/usuarios/${id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data;
+    }
+  },
 
   create: async (params) => {
     try {
       const response = await api.post('/register', params);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data;
+    }
+  },
+
+  update: async (id, params) => {
+    try {
+      const response = await api.put(`/usuarios/update/${id}`, params);
       return response.data;
     } catch (error) {
       console.log(error);

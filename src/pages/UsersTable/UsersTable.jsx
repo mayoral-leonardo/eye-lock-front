@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './UsersTable.css'
 import avatar from '../../assets/images/avatar.png'
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { Link } from 'react-router-dom';
 import users from './consumer'
 import { Button, Col, Input, message, Modal, Row, Select, Spin, Table, Tag } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -11,6 +10,7 @@ import { UploadOutlined } from '@ant-design/icons';
 export default function UsersTable() {
   const [loading, setLoading] = useState(false);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
   const [update, setUpdate] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,6 +24,9 @@ export default function UsersTable() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [option, setOption] = useState('');
+  const [selectedUser, setSelectedUser] = useState('');
+
   function translateLevels(level) {
     switch (level) {
       case 'resident':
@@ -36,10 +39,29 @@ export default function UsersTable() {
   }
 
   function validateEmail(email) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       return (true)
     }
     return (false)
+  }
+
+  async function getSpecificUser(id) {
+    setLoadingUser(true);
+    setSelectedUser(id);
+    try {
+      const response = await users.find(id);
+
+      if (response) {
+        setName(response.name);
+        setEmail(response.email);
+        setSelectedLevel(response.level);
+        setAvatarUrl(response.avatar === '' ? null : response.avatar);
+        setModalVisible(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setLoadingUser(false);
   }
 
   useEffect(() => {
@@ -63,11 +85,18 @@ export default function UsersTable() {
       dataIndex: 'name',
       key: 'name',
       width: '300px',
-      render: text =>
-        <Link
-          className='users-table__name-tag'
-        >{text}
-        </Link>,
+      render: (name, row) => {
+        return (
+          <span
+            className='users-table__name-tag'
+            onClick={() => {
+              setOption('edit')
+              getSpecificUser(row.id)
+            }}
+          >{(name)}
+          </span>
+        )
+      }
     },
 
     {
@@ -114,10 +143,7 @@ export default function UsersTable() {
     }
   }
 
-  function handleCancel() {
-    setModalVisible(false);
-    resetAllFields();
-  }
+
 
   function resetAllFields() {
     setName('');
@@ -127,7 +153,43 @@ export default function UsersTable() {
     setAvatarUrl(null);
   }
 
-  async function handleOk() {
+  function handleCancel() {
+    setModalVisible(false);
+    resetAllFields();
+  }
+
+  async function handleEdit() {
+    setLoadingSubmit(true);
+    const params = {
+      name: name,
+      level: selectedLevel,
+      email: email,
+      avatar: avatarUrl
+    }
+    try {
+      if (name === '') {
+        setNameStatus('error');
+        throw new Error('Por favor, preencha o nome do usuário');
+      }
+
+      if (selectedLevel === '') {
+        setLevelStatus('error');
+        throw new Error('Por favor, escolha o nível de acesso do usuário');
+      }
+
+      const response = await users.update(selectedUser, params);
+      alert(response.message);
+      setModalVisible(false);
+      resetAllFields();
+      setUpdate(!update);
+    } catch (error) {
+      console.log(error)
+      alert(error.message);
+    }
+    setLoadingSubmit(false);
+  }
+
+  async function handleCreate() {
     setLoadingSubmit(true);
     const params = {
       name: name,
@@ -176,14 +238,14 @@ export default function UsersTable() {
         <Modal
           className='users-table__modal'
           visible={modalVisible}
-          title="Cadastro de usuário"
-          onOk={handleOk}
+          title={option === 'edit' ? 'Editar usuário' : 'Cadastrar usuário'}
           onCancel={handleCancel}
           footer={[
             <Button key="back" onClick={handleCancel}>
               Cancelar
             </Button>,
-            <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+            <Button key="submit" type="primary" loading={loading} onClick={option === 'edit' ? handleEdit : handleCreate}
+            >
               {loadingSubmit ? <Spin /> : 'Enviar'}
             </Button>
           ]}
@@ -213,7 +275,7 @@ export default function UsersTable() {
                       setName(element.target.value)
                     }}></Input>
                 </Col>
-                <Col span={24}>
+                {option === 'create' && <Col span={24}>
                   <label htmlFor='input-email' style={{ color: 'white' }}>E-mail</label>
                   <Input
                     type='text'
@@ -224,8 +286,9 @@ export default function UsersTable() {
                       setEmailStatus('');
                       setEmail(element.target.value)
                     }}></Input>
-                </Col>
-                <Col span={24}>
+                </Col>}
+                
+                {option === 'create' && <Col span={24}>
                   <label htmlFor='input-password' style={{ color: 'white' }}>Senha</label>
                   <Input
                     type='text'
@@ -236,7 +299,7 @@ export default function UsersTable() {
                       setPasswordStatus('');
                       setPassword(element.target.value)
                     }}></Input>
-                </Col>
+                </Col>}
                 <Col span={24}>
                   <label htmlFor='input-level' style={{ color: 'white', marginRight: '15px' }}>Nível de acesso</label>
                   <Select
@@ -260,7 +323,10 @@ export default function UsersTable() {
           <Button
             type='primary'
             className='users-table__main-content__button__item'
-            onClick={() => setModalVisible(true)}
+            onClick={() => {
+              setOption('create')
+              setModalVisible(true)
+            }}
           >
             Criar novo usuário
           </Button>
@@ -272,7 +338,7 @@ export default function UsersTable() {
             loading={loading}
             columns={columns}
             dataSource={allUsers}
-            pagination={{ pageSize: 50 }} 
+            pagination={{ pageSize: 50 }}
             scroll={{ y: 240 }}
           />
         </div>
