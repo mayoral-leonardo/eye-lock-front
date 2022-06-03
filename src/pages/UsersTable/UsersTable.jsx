@@ -10,13 +10,16 @@ import { UploadOutlined } from '@ant-design/icons';
 export default function UsersTable() {
   const [loading, setLoading] = useState(false);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
+
   const [update, setUpdate] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  
   const [nameStatus, setNameStatus] = useState('');
   const [levelStatus, setLevelStatus] = useState('');
   const [emailStatus, setEmailStatus] = useState('');
   const [passwordStatus, setPasswordStatus] = useState('');
+
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [name, setName] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('');
