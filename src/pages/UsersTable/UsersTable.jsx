@@ -3,14 +3,13 @@ import './UsersTable.css'
 import avatar from '../../assets/images/avatar.png'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import users from './consumer'
-import { Button, Col, Input, message, Modal, Row, Select, Spin, Table, Tag } from 'antd';
+import { Button, Col, Input, Modal, Row, Select, Spin, Table, Tag } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
 export default function UsersTable() {
   const [loading, setLoading] = useState(false);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
-  const [loadingUser, setLoadingUser] = useState(false);
   const [update, setUpdate] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -46,7 +45,6 @@ export default function UsersTable() {
   }
 
   async function getSpecificUser(id) {
-    setLoadingUser(true);
     setSelectedUser(id);
     try {
       const response = await users.find(id);
@@ -55,13 +53,13 @@ export default function UsersTable() {
         setName(response.name);
         setEmail(response.email);
         setSelectedLevel(response.level);
-        setAvatarUrl(response.avatar === '' ? null : response.avatar);
+        setAvatarUrl(!response.avatar || response.avatar === '' ? null : response.avatar);
         setModalVisible(true);
       }
     } catch (error) {
       console.log(error);
     }
-    setLoadingUser(false);
+
   }
 
   useEffect(() => {
@@ -255,7 +253,7 @@ export default function UsersTable() {
               <label className='users-table__avatar'>
                 <span><UploadOutlined color='#FFFFFF' size={25} /></span>
                 <Input type='file' accept='image/*' onChange={handleFile} />
-                {avatarUrl === null ?
+                {avatarUrl === null || avatarUrl === '' ?
                   <img src={avatar} width='250' alt='Foto de perfil do usuário' />
                   : <img src={avatarUrl} width='250' alt='Foto de perfil do usuário' />
                 }
@@ -287,7 +285,7 @@ export default function UsersTable() {
                       setEmail(element.target.value)
                     }}></Input>
                 </Col>}
-                
+
                 {option === 'create' && <Col span={24}>
                   <label htmlFor='input-password' style={{ color: 'white' }}>Senha</label>
                   <Input
