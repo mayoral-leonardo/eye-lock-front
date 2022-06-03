@@ -84,6 +84,17 @@ export default function UsersTable() {
       width: '200px',
       align: 'center',
       render: level => <Tag color={level === 'resident' ? 'darkgreen' : 'darkblue'} key={level}>{translateLevels(level)}</Tag>,
+      filters: [
+        {
+          text: 'Residentes',
+          value: 'resident',
+        },
+        {
+          text: 'Visitantes',
+          value: 'visitor',
+        },
+      ],
+      onFilter: (value, record) => record.level.indexOf(value) === 0,
     },
 
   ];
@@ -254,13 +265,15 @@ export default function UsersTable() {
             Criar novo usuário
           </Button>
         </div>
-        <div className='table-padding'>
+        <div className='table'>
           <Table
             className='users-table__table'
-            rowClassName='users-table__table'
+            rowClassName='users-table__row-color'
             loading={loading}
             columns={columns}
             dataSource={allUsers}
+            pagination={{ pageSize: 50 }} 
+            scroll={{ y: 240 }}
           />
         </div>
       </div>
