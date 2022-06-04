@@ -42,33 +42,6 @@
   color: black !important;
 }
 
-.users-table__avatar {
-  margin-top: 12px;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.users-table__avatar input {
-  display: none;
-}
-
-.users-table__avatar span {
-  transform: translateX(-4px) translateY(-4px);
-  z-index: 99;
-  position: absolute;
-  opacity: 0.7;
-  transition: all 0.5s;
-}
-
-.users-table__avatar span:hover {
-  opacity: 7 !important;
-  transform: scale(1.4) translateX(-3px) translateY(-4px);
-}
 
 .ant-btn {
   border-radius: 8px !important;

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './UsersTable.css'
-import avatar from '../../assets/images/avatar.png'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import users from './consumer'
 import { Button, Col, Input, Modal, Row, Select, Spin, Table, Tag } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 
 
 export default function UsersTable() {
@@ -14,13 +12,13 @@ export default function UsersTable() {
   const [update, setUpdate] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  
+
   const [nameStatus, setNameStatus] = useState('');
   const [levelStatus, setLevelStatus] = useState('');
   const [emailStatus, setEmailStatus] = useState('');
   const [passwordStatus, setPasswordStatus] = useState('');
 
-  const [avatarUrl, setAvatarUrl] = useState(null);
+
   const [name, setName] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('');
   const [email, setEmail] = useState('');
@@ -56,7 +54,6 @@ export default function UsersTable() {
         setName(response.name);
         setEmail(response.email);
         setSelectedLevel(response.level);
-        setAvatarUrl(!response.avatar || response.avatar === '' ? null : response.avatar);
         setModalVisible(true);
       }
     } catch (error) {
@@ -129,29 +126,11 @@ export default function UsersTable() {
 
   ];
 
-  function handleFile(e) {
-    if (e.target.files[0]) {
-      const image = e.target.files[0];
-
-      if (image.type === 'image/jpeg' || image.type === 'image/png') {
-        // setImageAvatar(image);
-        setAvatarUrl(URL.createObjectURL(e.target.files[0]))
-      } else {
-        alert('Envie uma imagem do tipo JPEG ou PNG');
-        // setImageAvatar(null);
-        return null;
-      }
-    }
-  }
-
-
-
   function resetAllFields() {
     setName('');
     setEmail('');
     setPassword('');
     setSelectedLevel('');
-    setAvatarUrl(null);
   }
 
   function handleCancel() {
@@ -165,7 +144,7 @@ export default function UsersTable() {
       name: name,
       level: selectedLevel,
       email: email,
-      avatar: avatarUrl
+
     }
     try {
       if (name === '') {
@@ -197,7 +176,7 @@ export default function UsersTable() {
       level: selectedLevel,
       email: email,
       password: password,
-      avatar: avatarUrl
+
     }
     try {
       if (name === '') {
@@ -252,17 +231,8 @@ export default function UsersTable() {
           ]}
         >
           <Row gutter={[10, 10]}>
-            <Col span={8}>
-              <label className='users-table__avatar'>
-                <span><UploadOutlined color='#FFFFFF' size={25} /></span>
-                <Input type='file' accept='image/*' onChange={handleFile} />
-                {avatarUrl === null || avatarUrl === '' ?
-                  <img src={avatar} width='250' alt='Foto de perfil do usuário' />
-                  : <img src={avatarUrl} width='250' alt='Foto de perfil do usuário' />
-                }
-              </label>
-            </Col>
-            <Col span={16}>
+
+            <Col span={24}>
               <Row gutter={[10, 10]}>
                 <Col span={24}>
                   <label htmlFor='input-name' style={{ color: 'white' }}>Nome</label>
@@ -339,8 +309,8 @@ export default function UsersTable() {
             loading={loading}
             columns={columns}
             dataSource={allUsers}
-            pagination={{ pageSize: 50 }}
-            scroll={{ y: 240 }}
+            pagination={{ pageSize: 10 }}
+            scroll={{ y: 320 }}
           />
         </div>
       </div>
