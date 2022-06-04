@@ -5,10 +5,11 @@ import { AuthContext } from '../contexts/auth';
 export default function RouteWrapper({
   component: Component,
   isPrivate,
+  adminOnly,
   ...rest
 }) {
 
-  const { signed, loading } = useContext(AuthContext);
+  const { signed, loading, isAdmin } = useContext(AuthContext);
 
   if (loading) {
     return <h1>Carregando...</h1>
@@ -19,6 +20,10 @@ export default function RouteWrapper({
   }
 
   if (signed && !isPrivate) {
+    return <Redirect to='/dashboard' />
+  }
+  
+  if (signed && adminOnly && !isAdmin) {
     return <Redirect to='/dashboard' />
   }
 

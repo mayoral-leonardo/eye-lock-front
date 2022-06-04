@@ -6,6 +6,7 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loadingAuth, setLoadingAuth] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingRegistration, setLoadingRegistration] = useState(false);
@@ -35,6 +36,7 @@ function AuthProvider({ children }) {
     try {
       const response = await authConsumer.signIn(email, password);
       setUser(response.user);
+      if (response.user.level === 'admin') setIsAdmin(true);
       storageUser(response.user);
     } catch (error) {
       console.log(error);
@@ -79,6 +81,7 @@ function AuthProvider({ children }) {
       value={{
         signed: !!user,
         user,
+        isAdmin,
         loading,
         loadingAuth,
         loadingRegistration,

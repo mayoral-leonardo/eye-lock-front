@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import { AuthContext } from "../../contexts/auth"
 import { Grid, Drawer } from 'antd';
 import './Sidebar.css';
 
 export default function Sidebar() {
+  const { user } = useContext(AuthContext);
   const { useBreakpoint } = Grid;
   const [showDrawer, setShowDrawer] = useState(false);
 
@@ -27,8 +29,7 @@ export default function Sidebar() {
           <div className='sidebar__main-content'>
             <Link to='/' className='sidebar__main-content__button'>Dashboard</Link>
             <Link to='/functions' className='sidebar__main-content__button'>Funções</Link>
-            <button className='sidebar__main-content__button'>Imagens</button>
-            <Link to='/users' className='sidebar__main-content__button'>Usuários</Link>
+            {user.level === 'admin' && <Link to='/users' className='sidebar__main-content__button'>Usuários</Link>}
           </div>
         </Drawer>
       </section>
