@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './UsersTable.css'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import users from './consumer'
+import { translateLevels, validateEmail, validateErrors } from '../../utils/utils';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Input, Modal, Row, Select, Spin, Table, Tag } from 'antd';
 
-
 export default function UsersTable() {
+
   const [loading, setLoading] = useState(false);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
 
@@ -27,24 +28,6 @@ export default function UsersTable() {
 
   const [option, setOption] = useState('');
   const [selectedUser, setSelectedUser] = useState('');
-
-  function translateLevels(level) {
-    switch (level) {
-      case 'resident':
-        return 'Residente'
-      case 'visitor':
-        return 'Visitante'
-      default:
-        return 'Usuário'
-    }
-  }
-
-  function validateEmail(email) {
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      return (true)
-    }
-    return (false)
-  }
 
   async function getSpecificUser(id) {
     setSelectedUser(id);
@@ -186,13 +169,21 @@ export default function UsersTable() {
       }
 
       const response = await users.update(selectedUser, params);
-      alert(response.message);
+      Modal.success({
+        className: 'users-table__info-modal',
+        title: 'Sucesso !',
+        content: response.message,
+      });
       setModalVisible(false);
       resetAllFields();
       setUpdate(!update);
     } catch (error) {
       console.log(error)
-      alert(error.message);
+      Modal.error({
+        className: 'users-table__info-modal',
+        title: 'Atenção !',
+        content: error.message,
+      });
     }
     setLoadingSubmit(false);
   }
@@ -228,13 +219,27 @@ export default function UsersTable() {
       }
 
       const response = await users.create(params);
-      alert(response.message);
+      
+      if (response.error) {
+        const errorMessage = validateErrors(response.error);
+        throw new Error(errorMessage);
+      }
+
+      Modal.success({
+        className: 'users-table__info-modal',
+        title: 'Sucesso !',
+        content: response.message,
+      });
       setModalVisible(false);
       resetAllFields();
       setUpdate(!update);
     } catch (error) {
       console.log(error)
-      alert(error.message);
+      Modal.error({
+        className: 'users-table__info-modal',
+        title: 'Atenção !',
+        content: error.message,
+      });
     }
     setLoadingSubmit(false);
   }
@@ -243,13 +248,21 @@ export default function UsersTable() {
     setLoadingSubmit(true);
     try {
       const response = await users.delete(id);
-      alert(response.message);
+      Modal.success({
+        className: 'users-table__info-modal',
+        title: 'Sucesso !',
+        content: response.message,
+      });
       setModalVisible(false);
       resetAllFields();
       setUpdate(!update);
     } catch (error) {
       console.log(error)
-      alert(error.message);
+      Modal.error({
+        className: 'users-table__info-modal',
+        title: 'Atenção !',
+        content: error.message,
+      });
     }
     setLoadingSubmit(false);
   }

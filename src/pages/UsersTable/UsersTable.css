@@ -96,16 +96,16 @@
   color: black !important;
 }
 
-.users-table__delete-modal .ant-modal-body {
+.users-table__delete-modal .ant-modal-body, .users-table__info-modal .ant-modal-body {
   background-color: lightgrey !important;
 }
 
-.users-table__delete-modal .ant-modal-confirm-title {
+.users-table__delete-modal .ant-modal-confirm-title, .users-table__info-modal .ant-modal-confirm-title {
   color: black !important;
   font-weight: bold !important;
 }
 
-.users-table__delete-modal .ant-modal-confirm-content {
+.users-table__delete-modal .ant-modal-confirm-content, .users-table__info-modal .ant-modal-confirm-content {
   color: black !important;
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
+import { validateErrors } from "../utils/utils";
 import authConsumer from "./authConsumer";
-// import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -10,6 +10,7 @@ function AuthProvider({ children }) {
   const [loadingAuth, setLoadingAuth] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingRegistration, setLoadingRegistration] = useState(false);
+  const [error, setError] = useState(null);
 
   function storageUser(data) {
     localStorage.setItem('SistemaUser', JSON.stringify(data))
@@ -30,11 +31,11 @@ function AuthProvider({ children }) {
     loadStorage();
   }, [])
 
-  // Login de usuários já cadastrados
   async function signIn(email, password) {
     setLoadingAuth(true);
     try {
       const response = await authConsumer.signIn(email, password);
+      if (response.error) setError(validateErrors(response.error));
       setUser(response.user);
       if (response.user.level === 'admin') setIsAdmin(true);
       storageUser(response.user);
@@ -69,7 +70,6 @@ function AuthProvider({ children }) {
     }
   }
 
-  // Logout do usuário
   async function signOut() {
     await authConsumer.signOut();
     localStorage.removeItem('SistemaUser');
@@ -85,6 +85,8 @@ function AuthProvider({ children }) {
         loading,
         loadingAuth,
         loadingRegistration,
+        error,
+        setError,
         residentSignUp,
         visitorSignUp,
         signOut,

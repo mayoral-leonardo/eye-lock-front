@@ -1,20 +1,41 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import '../UsersTable/UsersTable.css';
 import { AuthContext } from "../../contexts/auth";
 import './SignIn.css';
 import logo from '../../assets/images/logo.png';
-// import { toast } from "react-toastify";
+import { Modal } from 'antd';
+import { validateEmail } from '../../utils/utils';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, loadingAuth } = useContext(AuthContext);
+  const { signIn, loadingAuth, error, setError } = useContext(AuthContext);
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
-    if(email !== '' && password !== '') signIn(email, password);
-    // if(email === '') toast.error('Insira o e-mail !');
-    // if(email !== '' && password === '') toast.error('Insira a senha !');
+    try {
+      if (error) {
+        const errorMessage = error;
+        setError(null)
+        throw new Error(errorMessage);
+      }
+      if (email !== '' && password !== '') {
+        if (validateEmail(email)) {
+          signIn(email, password);
+        } else {
+          throw new Error('Por favor, insira um e-mail válido');
+        }
+      } else {
+        throw new Error('Por favor, preencha todos os campos');
+      }
+    } catch (error) {
+      console.log(error)
+      Modal.error({
+        className: 'users-table__info-modal',
+        title: 'Atenção !',
+        content: error.message,
+      });
+    }
   }
 
   return (
