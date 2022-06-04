@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './UsersTable.css'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import users from './consumer'
+import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Input, Modal, Row, Select, Spin, Table, Tag } from 'antd';
 
 
@@ -124,6 +125,33 @@ export default function UsersTable() {
       onFilter: (value, record) => record.level.indexOf(value) === 0,
     },
 
+    {
+      title: '',
+      dataIndex: 'id',
+      key: 'id',
+      width: '80px',
+      align: 'center',
+      render: (id) => {
+        return (
+          <Button
+            type='primary'
+            className='users-table__delete-button'
+            onClick={() => {
+              Modal.confirm({
+                className: 'users-table__delete-modal',
+                title: 'Excluir usuário',
+                content: 'Tem certeza que deseja excluir este usuário?',
+                okText: 'Sim',
+                cancelText: 'Não',
+                onOk: () => handleDelete(id)
+              });
+            }}
+          >
+            <DeleteOutlined />
+          </Button>)
+      }
+    }
+
   ];
 
   function resetAllFields() {
@@ -211,6 +239,21 @@ export default function UsersTable() {
     setLoadingSubmit(false);
   }
 
+  async function handleDelete(id) {
+    setLoadingSubmit(true);
+    try {
+      const response = await users.delete(id);
+      alert(response.message);
+      setModalVisible(false);
+      resetAllFields();
+      setUpdate(!update);
+    } catch (error) {
+      console.log(error)
+      alert(error.message);
+    }
+    setLoadingSubmit(false);
+  }
+
   return (
     <section className='users-table'>
       <Sidebar />
@@ -284,7 +327,6 @@ export default function UsersTable() {
                     <Select.Option value='visitor'>Visitante</Select.Option>
                   </Select>
                 </Col>
-
               </Row>
             </Col>
           </Row>

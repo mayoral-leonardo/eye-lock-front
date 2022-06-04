@@ -1,11 +1,10 @@
-import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import { MenuOutlined } from '@ant-design/icons';
 import { AuthContext } from "../../contexts/auth"
 import './Header.css';
 
 export default function Header({ onClick }) {
-  const { user, signOut } = useContext(AuthContext);
+  const { signOut } = useContext(AuthContext);
   return (
     <header className='header'>
       <MenuOutlined className='header__menu-icon' onClick={onClick}/>

@@ -96,6 +96,29 @@
   color: black !important;
 }
 
+.users-table__delete-modal .ant-modal-body {
+  background-color: lightgrey !important;
+}
+
+.users-table__delete-modal .ant-modal-confirm-title {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.users-table__delete-modal .ant-modal-confirm-content {
+  color: black !important;
+}
+
+.users-table__delete-modal .ant-btn-primary {
+  background-color: rgb(141, 4, 4) !important;
+}
+
+.users-table__delete-button {
+  background-color: rgb(141, 4, 4) !important;
+  color: white !important;
+  border-radius: 8px !important;
+}
+
 .users-table__row-color {
   border-radius: 12px;
   color: black;

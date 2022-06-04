@@ -39,6 +39,16 @@ const users = {
       console.log(error);
       return error.response.data;
     }
+  },
+
+  delete: async (id) => {
+    try {
+      const response = await api.delete(`/usuarios/delete/${id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data;
+    }
   }
 }
 
