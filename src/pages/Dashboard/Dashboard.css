@@ -44,3 +44,15 @@
 .dashboard__icon {
   font-size: 60px;
 }
+
+@media screen and (max-width: 768px) {
+  .dashboard__cards-section {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .dashboard__cards-section {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}

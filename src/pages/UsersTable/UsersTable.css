@@ -128,7 +128,7 @@
   border-radius: 12px;
   color: black;
   background-color: rgb(216, 206, 216);
-  width: 1400px;
+  width: calc(100vw - 10vw);
 }
 
 .table {
