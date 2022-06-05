@@ -102,10 +102,93 @@
 }
 
 .button {
-  font-size: 40px !important;
+  font-size: 2.5rem !important;
   color: white !important;
 }
 
 .on-color {
   color: #faf611 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .system-functions__cards__item {
+    width: 25rem;
+    height: 30rem;
+    border-radius: 12px;
+    border: aqua solid 1px;
+    margin: 0.5rem 1rem;
+  }
+
+  .system-functions__cards__item__header > span {
+    font-size: 1.5rem;
+  }
+
+  .system-functions__cards__item__number > span{
+    font-size: 7.5rem;
+  }
+
+  .system-functions__cards__item__title__buttons > span {
+    font-size: 1.25rem;
+  }
+
+  .button {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .system-functions__cards {
+    flex-direction: column;
+  }
+
+  .system-functions__cards__item {
+    width: 20rem;
+    height: 16rem;
+    border-radius: 12px;
+    border: aqua solid 1px;
+    margin: 0.5rem 1rem;
+  }
+
+  .system-functions__cards__item__header > span {
+    font-size: 1.2rem;
+  }
+
+  .system-functions__cards__item__number > span{
+    font-size: 6.5rem;
+  }
+
+  .system-functions__cards__item__title__buttons > span {
+    font-size: 1.15rem;
+  }
+
+  .button {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media screen and (max-width: 350px) {
+
+  .system-functions__cards__item {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 12px;
+    border: aqua solid 1px;
+    margin: 0.5rem 1rem;
+  }
+
+  .system-functions__cards__item__header > span {
+    font-size: 1.2rem;
+  }
+
+  .system-functions__cards__item__number > span{
+    font-size: 6.5rem;
+  }
+
+  .system-functions__cards__item__title__buttons > span {
+    font-size: 1.15rem;
+  }
+
+  .button {
+    font-size: 1.5rem !important;
+  }
 }
