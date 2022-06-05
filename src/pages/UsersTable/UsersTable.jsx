@@ -318,7 +318,7 @@ export default function UsersTable() {
                 {option === 'create' && <Col span={24}>
                   <label htmlFor='input-password' style={{ color: 'white' }}>Senha</label>
                   <Input
-                    type='text'
+                    type='password'
                     id='input-password'
                     status={passwordStatus}
                     value={password}
