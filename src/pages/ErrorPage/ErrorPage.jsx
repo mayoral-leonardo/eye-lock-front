@@ -6,7 +6,7 @@ export default function ErrorPage () {
     <div className='not-found'>
       <h1>404</h1>
       <h2>Página não encontrada !</h2>
-      <Link to='/'>Veja todos os filmes </Link>
+      <Link to='/'>Voltar à página inicial </Link>
     </div>
   )
 } 
